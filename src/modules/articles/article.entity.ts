@@ -5,10 +5,12 @@ import {
   Generated,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  ManyToOne
 } from "typeorm";
 
 import { Comment } from "src/modules/comments/comment.entity";
+import { User } from "../users/user.entity";
 
 @Entity()
 export class Article {
@@ -34,7 +36,7 @@ export class Article {
   @Column()
   body: string;
 
-  @Column()
+  @Column({ nullable: true })
   bookImage: string;
 
   @CreateDateColumn()
@@ -42,6 +44,12 @@ export class Article {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(
+    type => User,
+    user => user.articles
+  )
+  user: User;
 
   @OneToMany(
     type => Comment,

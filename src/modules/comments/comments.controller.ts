@@ -1,4 +1,19 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Body } from "@nestjs/common";
 
-@Controller('comments')
-export class CommentsController {}
+import { CommentsService } from "./comments.service";
+import { CreateCommentInput } from "./create-comment.input";
+
+@Controller("comments")
+export class CommentsController {
+  constructor(private commentsService: CommentsService) {}
+
+  @Get("/")
+  findAll() {
+    return this.commentsService.findAll();
+  }
+
+  @Post("/")
+  create(@Body() input) {
+    return this.commentsService.create(input);
+  }
+}

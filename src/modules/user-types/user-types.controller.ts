@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body } from "@nestjs/common";
 
 import { UserTypesService } from "./user-types.service";
-import { CreateUserTypesInput } from "./create-usertypes.input";
+import { CreateUserTypeInput } from "./create-usertype.input";
 
 @Controller("user-types")
 export class UserTypesController {
@@ -13,7 +13,7 @@ export class UserTypesController {
   }
 
   @Post("/")
-  create(@Body() input: CreateUserTypesInput) {
+  create(@Body() input: CreateUserTypeInput) {
     return this.userTypesService.create(input);
   }
 }

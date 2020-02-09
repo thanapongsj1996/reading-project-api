@@ -5,11 +5,14 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 import { Exclude, Expose } from "class-transformer";
 
 import { UserType } from "src/modules/user-types/user-type.entity";
+import { Comment } from "../comments/comment.entity";
+import { Article } from "../articles/article.entity";
 
 @Entity()
 export class User {
@@ -39,7 +42,6 @@ export class User {
   password: string;
 
   @Column()
-  @Exclude()
   typeId: number;
 
   @Column()
@@ -59,4 +61,16 @@ export class User {
     userType => userType.users
   )
   type: UserType;
+
+  @OneToMany(
+    type => Article,
+    article => article.user
+  )
+  articles: Article[];
+
+  @OneToMany(
+    type => Comment,
+    comment => comment.user
+  )
+  comments: Comment[];
 }

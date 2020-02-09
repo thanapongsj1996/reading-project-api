@@ -36,6 +36,12 @@ export class Comment {
   updateAt: Date;
 
   @ManyToOne(
+    type => User,
+    user => user.comments
+  )
+  user: User;
+
+  @ManyToOne(
     type => Article,
     article => article.comments
   )
