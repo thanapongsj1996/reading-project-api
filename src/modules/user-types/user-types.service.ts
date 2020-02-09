@@ -2,17 +2,17 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UserTypes } from "./user-type.entity";
+import { UserType } from "./user-type.entity";
 
 @Injectable()
 export class UserTypesService {
   constructor(
-    @InjectRepository(UserTypes)
-    private userTypesRepository: Repository<UserTypes>
+    @InjectRepository(UserType)
+    private userTypesRepository: Repository<UserType>
   ) {}
 
   getAll() {
-    return this.userTypesRepository.find({ relations: ["users"] });
+    return this.userTypesRepository.find();
   }
 
   create(input) {

@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Exclude, Expose } from "class-transformer";
 
-import { UserTypes } from "src/modules/user-types/user-type.entity";
+import { UserType } from "src/modules/user-types/user-type.entity";
 
 @Entity()
 export class User {
@@ -55,8 +55,8 @@ export class User {
   updatedAt: Date;
 
   @ManyToOne(
-    type => UserTypes,
+    type => UserType,
     userType => userType.users
   )
-  type: UserTypes;
+  type: UserType;
 }

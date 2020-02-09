@@ -1,17 +1,18 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
   Generated,
+  Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  ManyToOne
 } from "typeorm";
 
 import { User } from "src/modules/users/user.entity";
+import { Article } from "src/modules/articles/article.entity";
 
 @Entity()
-export class UserType {
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,17 +21,23 @@ export class UserType {
   uid: string;
 
   @Column()
-  typeName: string;
+  userId: number;
+
+  @Column()
+  articleId: number;
+
+  @Column()
+  body: string;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updateAt: Date;
 
-  @OneToMany(
-    type => User,
-    user => user.type
+  @ManyToOne(
+    type => Article,
+    article => article.comments
   )
-  users: User[];
+  article: Article;
 }

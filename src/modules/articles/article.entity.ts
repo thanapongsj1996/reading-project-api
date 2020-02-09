@@ -1,17 +1,17 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
+  Column,
   Generated,
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany
 } from "typeorm";
 
-import { User } from "src/modules/users/user.entity";
+import { Comment } from "src/modules/comments/comment.entity";
 
 @Entity()
-export class UserType {
+export class Article {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,7 +20,22 @@ export class UserType {
   uid: string;
 
   @Column()
-  typeName: string;
+  userId: number;
+
+  @Column()
+  bookId: number;
+
+  @Column()
+  title: string;
+
+  @Column()
+  subtitle: string;
+
+  @Column()
+  body: string;
+
+  @Column()
+  bookImage: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -29,8 +44,8 @@ export class UserType {
   updatedAt: Date;
 
   @OneToMany(
-    type => User,
-    user => user.type
+    type => Comment,
+    comment => comment.article
   )
-  users: User[];
+  comments: Comment[];
 }
