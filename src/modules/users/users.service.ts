@@ -14,7 +14,7 @@ export class UsersService {
   ) {}
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ["type"] });
   }
 
   async create(input: CreateUserInput) {

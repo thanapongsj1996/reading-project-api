@@ -4,9 +4,12 @@ import {
   Generated,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from "typeorm";
 import { Exclude, Expose } from "class-transformer";
+
+import { UserTypes } from "src/modules/user-types/user-type.entity";
 
 @Entity()
 export class User {
@@ -28,7 +31,7 @@ export class User {
 
   @Expose()
   get fullName() {
-    return this.firstName + " " + this.lastName;
+    return `${this.firstName} ${this.lastName}`;
   }
 
   @Column()
@@ -49,4 +52,10 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(
+    type => UserTypes,
+    userType => userType.users
+  )
+  type: UserTypes;
 }
