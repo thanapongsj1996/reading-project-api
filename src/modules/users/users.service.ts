@@ -17,6 +17,13 @@ export class UsersService {
     return this.userRepository.find({ relations: ["type"] });
   }
 
+  findOne(input: string) {
+    return this.userRepository.findOne({
+      where: { uid: input },
+      relations: ["type"]
+    });
+  }
+
   async create(input: CreateUserInput) {
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(input.password, salt);

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param } from "@nestjs/common";
 
 import { UsersService } from "./users.service";
 import { CreateUserInput } from "./create-user.input";
@@ -7,12 +7,17 @@ import { CreateUserInput } from "./create-user.input";
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get("/")
+  @Get("")
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Post("/")
+  @Get(":uid")
+  findOne(@Param("uid") uid) {
+    return this.usersService.findOne(uid);
+  }
+
+  @Post("")
   create(@Body() input: CreateUserInput) {
     return this.usersService.create(input);
   }

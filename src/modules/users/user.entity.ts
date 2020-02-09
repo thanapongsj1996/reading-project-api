@@ -39,6 +39,7 @@ export class User {
   password: string;
 
   @Column()
+  @Exclude()
   typeId: number;
 
   @Column()
