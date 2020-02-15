@@ -1,19 +1,20 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Query } from "@nestjs/common";
 
 import { CommentsService } from "./comments.service";
 import { CreateCommentInput } from "./create-comment.input";
+import { CommentQuery } from "./comment.query";
 
 @Controller("comments")
 export class CommentsController {
   constructor(private commentsService: CommentsService) {}
 
   @Get("/")
-  findAll() {
-    return this.commentsService.findAll();
+  findAll(@Query() query: CommentQuery) {
+    return this.commentsService.findAll(query);
   }
 
   @Post("/")
-  create(@Body() input) {
+  create(@Body() input: CreateCommentInput) {
     return this.commentsService.create(input);
   }
 }

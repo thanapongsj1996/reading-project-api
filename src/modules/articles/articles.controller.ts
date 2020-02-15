@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param } from "@nestjs/common";
 
 import { ArticlesService } from "./articles.service";
 import { CreateArticleInput } from "./create-article.input";
@@ -7,12 +7,17 @@ import { CreateArticleInput } from "./create-article.input";
 export class ArticlesController {
   constructor(private articlesService: ArticlesService) {}
 
-  @Get("")
+  @Get("/")
   findAll() {
     return this.articlesService.findAll();
   }
 
-  @Post()
+  @Get("/:articleUid")
+  findOne(@Param("articleUid") articleUid: string) {
+    return this.articlesService.findOne(articleUid);
+  }
+
+  @Post("/")
   create(@Body() input: CreateArticleInput) {
     return this.articlesService.create(input);
   }

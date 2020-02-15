@@ -7,6 +7,7 @@ import { UsersModule } from "src/modules/users/users.module";
 import { UserTypesModule } from "src/modules/user-types/user-types.module";
 import { ArticlesModule } from "src/modules/articles/articles.module";
 import { CommentsModule } from "src/modules/comments/comments.module";
+import { LikesModule } from "src/modules/likes/likes.module";
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { CommentsModule } from "src/modules/comments/comments.module";
     UsersModule,
     UserTypesModule,
     ArticlesModule,
-    CommentsModule
+    CommentsModule,
+    LikesModule
   ],
   controllers: [AppController],
   providers: [AppService]

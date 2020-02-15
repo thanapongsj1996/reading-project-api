@@ -10,7 +10,8 @@ import {
 } from "typeorm";
 
 import { Comment } from "src/modules/comments/comment.entity";
-import { User } from "../users/user.entity";
+import { User } from "src/modules/users/user.entity";
+import { Like } from "src/modules/likes/like.entity";
 
 @Entity()
 export class Article {
@@ -56,4 +57,10 @@ export class Article {
     comment => comment.article
   )
   comments: Comment[];
+
+  @OneToMany(
+    type => Like,
+    like => like.article
+  )
+  likes: Like;
 }
