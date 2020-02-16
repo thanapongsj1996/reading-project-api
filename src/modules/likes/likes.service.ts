@@ -12,8 +12,11 @@ export class LikesService {
     private likeRepository: Repository<Like>
   ) {}
 
-  findAll() {
-    return this.likeRepository.find({ relations: ["user"] });
+  findAll(query) {
+    return this.likeRepository.find({
+      where: { articleId: query.articleId },
+      relations: ["user"]
+    });
   }
 
   create(input: CreateLikeInput) {

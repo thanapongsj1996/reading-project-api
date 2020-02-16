@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Body } from "@nestjs/common";
+import { Controller, Get, Post, Body, Query } from "@nestjs/common";
 
 import { LikesService } from "./likes.service";
 import { CreateLikeInput } from "./create-like.input";
+import { LikeQuery } from "./like.query";
 
 @Controller("likes")
 export class LikesController {
   constructor(private likesService: LikesService) {}
 
   @Get("/")
-  findAll() {
-    return this.likesService.findAll();
+  findAll(@Query() query: LikeQuery) {
+    return this.likesService.findAll(query);
   }
 
   @Post("/")
