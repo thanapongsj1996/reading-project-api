@@ -9,6 +9,7 @@ import { ArticlesModule } from "src/modules/articles/articles.module";
 import { CommentsModule } from "src/modules/comments/comments.module";
 import { LikesModule } from "src/modules/likes/likes.module";
 import { EmotionsModule } from "src/modules/emotions/emotions.module";
+import { BooksModule } from "src/modules/books/books.module";
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { EmotionsModule } from "src/modules/emotions/emotions.module";
     ArticlesModule,
     CommentsModule,
     LikesModule,
-    EmotionsModule
+    EmotionsModule,
+    BooksModule
   ],
   controllers: [AppController],
   providers: [AppService]

@@ -8,11 +8,12 @@ import {
   OneToMany,
   ManyToOne
 } from "typeorm";
+import { Expose, Exclude } from "class-transformer";
 
 import { Comment } from "src/modules/comments/comment.entity";
 import { User } from "src/modules/users/user.entity";
 import { Like } from "src/modules/likes/like.entity";
-import { Expose, Exclude } from "class-transformer";
+import { Book } from "src/modules/books/book.entity";
 
 @Entity()
 export class Article {
@@ -65,4 +66,10 @@ export class Article {
     like => like.article
   )
   likes: Like;
+
+  @ManyToOne(
+    type => Book,
+    book => book.articles
+  )
+  book: Book;
 }

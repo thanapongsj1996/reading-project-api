@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 
 import { Article } from "./article.entity";
-import { Comment } from "src/modules/comments/comment.entity";
 import { Repository } from "typeorm";
 
 @Injectable()
@@ -13,7 +12,9 @@ export class ArticlesService {
   ) {}
 
   findAll() {
-    return this.articlesRepository.find({ relations: ["user", "likes"] });
+    return this.articlesRepository.find({
+      relations: ["user", "likes", "book"]
+    });
   }
 
   findOne(articleUid: string) {
