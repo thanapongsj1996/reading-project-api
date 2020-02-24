@@ -5,10 +5,13 @@ import {
   Generated,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
+  ManyToOne
 } from "typeorm";
 
 import { Article } from "src/modules/articles/article.entity";
+import { Author } from "src/modules/authors/author.entity";
+import { Category } from "src/modules/categories/category.entity";
 
 @Entity()
 export class Book {
@@ -45,4 +48,16 @@ export class Book {
     article => article.book
   )
   articles: Article[];
+
+  @ManyToOne(
+    type => Category,
+    category => category.books
+  )
+  category: Category;
+
+  @ManyToOne(
+    type => Author,
+    author => author.books
+  )
+  author: Author;
 }

@@ -4,8 +4,11 @@ import {
   Column,
   Generated,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from "typeorm";
+
+import { Book } from "src/modules/books/book.entity";
 
 @Entity()
 export class Category {
@@ -24,4 +27,10 @@ export class Category {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(
+    type => Book,
+    book => book.category
+  )
+  books: Book[];
 }

@@ -12,6 +12,6 @@ export class BooksService {
   ) {}
 
   findAll() {
-    return this.booksRepository.find();
+    return this.booksRepository.find({ relations: ["category", "author"] });
   }
 }
