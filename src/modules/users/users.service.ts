@@ -24,10 +24,13 @@ export class UsersService {
     });
   }
 
-  async create(input: CreateUserInput) {
+  async create(input: CreateUserInput, avatarPath) {
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(input.password, salt);
-    const user = this.userRepository.merge(new User(), input, { password });
+    const user = this.userRepository.merge(new User(), input, {
+      password,
+      profileImage: avatarPath
+    });
 
     return this.userRepository.save(user);
   }

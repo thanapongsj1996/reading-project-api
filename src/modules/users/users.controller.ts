@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Param, Patch } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+  UploadedFile
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 import { UsersService } from "./users.service";
 import { CreateUserInput } from "./create-user.input";
@@ -18,7 +28,11 @@ export class UsersController {
   }
 
   @Post("/")
-  create(@Body() input: CreateUserInput) {
-    return this.usersService.create(input);
+  @UseInterceptors(
+    FileInterceptor("avatar", { dest: "uploads/users" }),
+    ClassSerializerInterceptor
+  )
+  create(@Body() input: CreateUserInput, @UploadedFile() avatar) {
+    return this.usersService.create(input, avatar.path);
   }
 }
