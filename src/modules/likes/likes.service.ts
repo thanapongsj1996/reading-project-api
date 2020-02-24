@@ -15,7 +15,7 @@ export class LikesService {
   findAll(query) {
     return this.likeRepository.find({
       where: { articleId: query.articleId },
-      relations: ["user"]
+      relations: ["user", "emotion"]
     });
   }
 

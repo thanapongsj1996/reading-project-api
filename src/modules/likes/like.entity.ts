@@ -9,6 +9,7 @@ import {
 
 import { User } from "src/modules/users/user.entity";
 import { Article } from "src/modules/articles/article.entity";
+import { Emotion } from "src/modules/emotions/emotion.entity";
 
 @Entity()
 export class Like {
@@ -41,4 +42,10 @@ export class Like {
     article => article.likes
   )
   article: Article;
+
+  @ManyToOne(
+    type => Emotion,
+    emotion => emotion.likes
+  )
+  emotion: Emotion;
 }

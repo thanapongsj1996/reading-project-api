@@ -8,6 +8,7 @@ import { UserTypesModule } from "src/modules/user-types/user-types.module";
 import { ArticlesModule } from "src/modules/articles/articles.module";
 import { CommentsModule } from "src/modules/comments/comments.module";
 import { LikesModule } from "src/modules/likes/likes.module";
+import { EmotionsModule } from "src/modules/emotions/emotions.module";
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { LikesModule } from "src/modules/likes/likes.module";
     UserTypesModule,
     ArticlesModule,
     CommentsModule,
-    LikesModule
+    LikesModule,
+    EmotionsModule
   ],
   controllers: [AppController],
   providers: [AppService]

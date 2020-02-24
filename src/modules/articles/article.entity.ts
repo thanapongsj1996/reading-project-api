@@ -12,6 +12,7 @@ import {
 import { Comment } from "src/modules/comments/comment.entity";
 import { User } from "src/modules/users/user.entity";
 import { Like } from "src/modules/likes/like.entity";
+import { Expose, Exclude } from "class-transformer";
 
 @Entity()
 export class Article {
@@ -58,6 +59,7 @@ export class Article {
   )
   comments: Comment[];
 
+  @Exclude()
   @OneToMany(
     type => Like,
     like => like.article
