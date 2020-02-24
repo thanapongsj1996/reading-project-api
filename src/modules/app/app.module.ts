@@ -10,6 +10,8 @@ import { CommentsModule } from "src/modules/comments/comments.module";
 import { LikesModule } from "src/modules/likes/likes.module";
 import { EmotionsModule } from "src/modules/emotions/emotions.module";
 import { BooksModule } from "src/modules/books/books.module";
+import { AuthorsModule } from "src/modules/authors/authors.module";
+import { CategoriesModule } from "src/modules/categories/categories.module";
 
 @Module({
   imports: [
@@ -20,7 +22,9 @@ import { BooksModule } from "src/modules/books/books.module";
     CommentsModule,
     LikesModule,
     EmotionsModule,
-    BooksModule
+    BooksModule,
+    AuthorsModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService]
