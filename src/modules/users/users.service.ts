@@ -17,11 +17,15 @@ export class UsersService {
     return this.userRepository.find({ relations: ["type"] });
   }
 
-  findOne(input: string) {
+  findOne(uid: string) {
     return this.userRepository.findOne({
-      where: { uid: input },
+      where: { uid },
       relations: ["type"]
     });
+  }
+
+  findBy(filter) {
+    return this.userRepository.findOne(filter);
   }
 
   async create(input: CreateUserInput, avatarPath) {

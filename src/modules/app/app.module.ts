@@ -12,6 +12,7 @@ import { EmotionsModule } from "src/modules/emotions/emotions.module";
 import { BooksModule } from "src/modules/books/books.module";
 import { AuthorsModule } from "src/modules/authors/authors.module";
 import { CategoriesModule } from "src/modules/categories/categories.module";
+import { AuthModule } from "src/modules/auth/auth.module";
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { CategoriesModule } from "src/modules/categories/categories.module";
     EmotionsModule,
     BooksModule,
     AuthorsModule,
-    CategoriesModule
+    CategoriesModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService]

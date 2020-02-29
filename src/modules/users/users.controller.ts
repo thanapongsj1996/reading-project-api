@@ -6,9 +6,11 @@ import {
   Param,
   UseInterceptors,
   ClassSerializerInterceptor,
-  UploadedFile
+  UploadedFile,
+  UseGuards
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
+import { AuthGuard } from "@nestjs/passport";
 
 import { UsersService } from "./users.service";
 import { CreateUserInput } from "./create-user.input";
@@ -17,11 +19,13 @@ import { CreateUserInput } from "./create-user.input";
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @UseGuards(AuthGuard())
   @Get("/")
   findAll() {
     return this.usersService.findAll();
   }
 
+  @UseGuards(AuthGuard())
   @Get("/:uid")
   findOne(@Param("uid") uid) {
     return this.usersService.findOne(uid);

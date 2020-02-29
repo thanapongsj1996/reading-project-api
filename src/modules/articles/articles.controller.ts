@@ -1,7 +1,18 @@
-import { Controller, Get, Post, Body, Param } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Req,
+  UseGuards
+} from "@nestjs/common";
 
 import { ArticlesService } from "./articles.service";
 import { CreateArticleInput } from "./create-article.input";
+import { UpdateArticleInput } from "./update-article.input";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller("articles")
 export class ArticlesController {
@@ -20,5 +31,15 @@ export class ArticlesController {
   @Post("/")
   create(@Body() input: CreateArticleInput) {
     return this.articlesService.create(input);
+  }
+
+  @UseGuards(AuthGuard())
+  @Patch("/:articleId")
+  update(
+    @Param("articleId") articleId: string,
+    @Body() input: UpdateArticleInput,
+    @Req() req
+  ) {
+    return this.articlesService.update(articleId, input, req.user.id);
   }
 }

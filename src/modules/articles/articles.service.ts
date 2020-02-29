@@ -1,8 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, ForbiddenException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 import { Article } from "./article.entity";
-import { Repository } from "typeorm";
+import { CreateArticleInput } from "./create-article.input";
+import { UpdateArticleInput } from "./update-article.input";
 
 @Injectable()
 export class ArticlesService {
@@ -24,8 +26,20 @@ export class ArticlesService {
     });
   }
 
-  create(input) {
+  create(input: CreateArticleInput) {
     const article = this.articlesRepository.create(input);
+
+    return this.articlesRepository.save(article);
+  }
+
+  async update(articleId, input: UpdateArticleInput, userId) {
+    let article = await this.articlesRepository.findOne(articleId);
+
+    if (userId !== article.userId) {
+      throw new ForbiddenException();
+    }
+
+    article = this.articlesRepository.merge(article, input);
 
     return this.articlesRepository.save(article);
   }
